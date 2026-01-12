@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Discount_Calculator</title>
+        <style>
+    fieldset
+    {
+    background-color: rgb(186, 248, 248);
+    width:500px;
+    height:400px;
+    margin-left: 250px;
+    padding: 50px;
+    line-height: 3;
+}
+h1{
+    color:black;
+    text-align: center;
+    text-decoration: underline;
+}
+.ip1{
+    margin-left:20px;
+    height: 25px;
+    width:200px;
+
+}
+.ip2{
+    margin-left:55px;
+    height: 25px;
+    width:200px;
+}
+button{
+    background-color: rgb(65, 65, 250);
+    color:white;
+    height:30px;
+    width: 200px;
+    border: 1px solid white;
+    text-shadow: 2px 2px 2px black;
+    margin-top: 20px;
+    margin-left: 150px;
+    bottom: 400PX;
+    cursor: pointer;
+}
+#result{
+    text-align: center;
+}
+</style>
+</head>
+
+ <body>
+        <fieldset>
+        <h1>
+            DISCOUNT CALCULATOR
+        </h1>
+        <b><label>Original Price:</label></b>
+        <input type="text" name="original price" placeholder="Please Eneter Original Price" required="*" class="ip1">
+        <br>
+        <b><label>Discount:</label></b>
+        <input type="text" name="discount" placeholder="Please Enter Discount" required="*" class="ip2">
+        <br>
+        <div class="button">
+        <button onclick="disFunc()" id="btn">Calculate</button>
+        </div>  
+
+        <hr>
+        <div id="result">
+            <p id="discount"></p>
+        </div>
+
+    
+    
+       </fieldset> 
+    </body>
+    <script>
+    const inp1=document.querySelector(".ip1");
+    const inp2=document.querySelector(".ip2");
+    const disBtn=document.querySelector("#btn");
+    const result=document.querySelector("#discount");
+function disFunc(){
+    const a=(inp1.value)*(inp2.value)/100;
+    const c=(inp1.value)-(a);
+    const b=(result.innerText=`Your discounted price is ${c}`);
+}
+</script>
+</html>
