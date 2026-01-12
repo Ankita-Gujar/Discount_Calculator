@@ -1,83 +1,125 @@
 <!DOCTYPE html>
-<html>
-    <head><title>Discount_Calculator</title>
-        <style>
-    fieldset
-    {
-    background-color: rgb(186, 248, 248);
-    width:500px;
-    height:400px;
-    margin-left: 250px;
-    padding: 50px;
-    line-height: 3;
-}
-h1{
-    color:black;
-    text-align: center;
-    text-decoration: underline;
-}
-.ip1{
-    margin-left:20px;
-    height: 25px;
-    width:200px;
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Discount Calculator</title>
 
-}
-.ip2{
-    margin-left:55px;
-    height: 25px;
-    width:200px;
-}
-button{
-    background-color: rgb(65, 65, 250);
-    color:white;
-    height:30px;
-    width: 200px;
-    border: 1px solid white;
-    text-shadow: 2px 2px 2px black;
-    margin-top: 20px;
-    margin-left: 150px;
-    bottom: 400PX;
-    cursor: pointer;
-}
-#result{
-    text-align: center;
-}
-</style>
+    <style>
+        body{
+            background-color: #f2f6ff;
+            font-family: Arial, sans-serif;
+        }
+
+        fieldset{
+            background-color: rgb(186, 248, 248);
+            width:500px;
+            height:auto;
+            margin:100px auto;
+            padding:40px;
+            line-height:2.5;
+            border-radius: 10px;
+            border:2px solid #333;
+        }
+
+        h1{
+            color:black;
+            text-align:center;
+            text-decoration: underline;
+        }
+
+        label{
+            font-weight:bold;
+        }
+
+        input{
+            height:30px;
+            width:220px;
+            margin-left:20px;
+            padding-left:5px;
+        }
+
+        button{
+            background-color: rgb(65, 65, 250);
+            color:white;
+            height:35px;
+            width:220px;
+            border:none;
+            text-shadow: 1px 1px 2px black;
+            margin:20px auto;
+            cursor:pointer;
+            display:block;
+            border-radius:5px;
+        }
+
+        button:hover{
+            background-color: rgb(40, 40, 220);
+        }
+
+        #result{
+            text-align:center;
+            font-size:18px;
+            font-weight:bold;
+            margin-top:15px;
+        }
+
+        .error{
+            color:red;
+        }
+
+        .success{
+            color:green;
+        }
+    </style>
 </head>
 
- <body>
-        <fieldset>
-        <h1>
-            DISCOUNT CALCULATOR
-        </h1>
-        <b><label>Original Price:</label></b>
-        <input type="text" name="original price" placeholder="Please Eneter Original Price" required="*" class="ip1">
+<body>
+    <fieldset>
+        <h1>DISCOUNT CALCULATOR</h1>
+
+        <label>Original Price:</label>
+        <input type="number" id="price" placeholder="Enter original price">
+
         <br>
-        <b><label>Discount:</label></b>
-        <input type="text" name="discount" placeholder="Please Enter Discount" required="*" class="ip2">
-        <br>
-        <div class="button">
-        <button onclick="disFunc()" id="btn">Calculate</button>
-        </div>  
+
+        <label>Discount (%):</label>
+        <input type="number" id="discount" placeholder="Enter discount percentage">
+
+        <button onclick="calculateDiscount()">Calculate</button>
 
         <hr>
-        <div id="result">
-            <p id="discount"></p>
-        </div>
 
-    
-    
-       </fieldset> 
-    </body>
+        <div id="result"></div>
+    </fieldset>
+
     <script>
-    const inp1=document.querySelector(".ip1");
-    const inp2=document.querySelector(".ip2");
-    const disBtn=document.querySelector("#btn");
-    const result=document.querySelector("#discount");
-function disFunc(){
-    const a=(inp1.value)*(inp2.value)/100;
-    const c=(inp1.value)-(a);
-    const b=(result.innerText=`Your discounted price is ${c}`);
-}
-</script>
+        function calculateDiscount(){
+            const price = parseFloat(document.getElementById("price").value);
+            const discount = parseFloat(document.getElementById("discount").value);
+            const resultDiv = document.getElementById("result");
+
+            if(isNaN(price) || isNaN(discount)){
+                resultDiv.innerHTML = "⚠️ Please enter valid values";
+                resultDiv.className = "error";
+                return;
+            }
+
+            if(price <= 0 || discount < 0){
+                resultDiv.innerHTML = "⚠️ Values must be positive";
+                resultDiv.className = "error";
+                return;
+            }
+
+            const discountAmount = (price * discount) / 100;
+            const finalPrice = price - discountAmount;
+
+            resultDiv.innerHTML = `
+                Original Price: ₹${price}<br>
+                Discount: ${discount}%<br>
+                <strong>Final Price: ₹${finalPrice.toFixed(2)}</strong>
+            `;
+            resultDiv.className = "success";
+        }
+    </script>
+</body>
 </html>
+
